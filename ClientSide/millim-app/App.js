@@ -1,19 +1,49 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import {StyleSheet, Text, View, StatusBar} from 'react-native';
+import {createSwitchNavigator, createAppContainer} from "react-navigation";
+import {AuthNavigator} from "./components/navigators/AuthenticationNavigator";
+import {DashboardNavigator} from "./components/navigators/DashboardNavigator";
+import {AppLoading} from "expo";
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-    </View>
-  );
+
+export default class App extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            appReady: false
+        }
+    }
+
+
+    render() {
+
+        return (
+            <View style={{flex: 1}}>
+                <StatusBar hidden/>
+                <AppContainer/>
+            </View>
+        );
+    }
 }
 
+const AppNavigator = createSwitchNavigator({
+    Auth: AuthNavigator,
+    Dashboard: DashboardNavigator
+
+}, {
+    backBehavior: 'none',
+    initialRouteName: 'Auth'
+});
+
+const AppContainer = createAppContainer(AppNavigator);
+
+
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
 });
