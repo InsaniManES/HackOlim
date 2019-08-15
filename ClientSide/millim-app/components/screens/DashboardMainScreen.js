@@ -14,7 +14,7 @@ export default class DashboardMainScreen extends React.PureComponent {
 
     render() {
         return (
-          <KeyboardAvoidingView  behavior={'height'} contentContainerStyle={{alignItems: 'center'}} style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+          <KeyboardAvoidingView  behavior={'height'} contentContainerStyle={{alignItems: 'center'}} style={{flex: 1, paddingTop: 25, alignItems: 'center'}}>
             <View style={styles.row}>
                 <Text style={styles.textStyle}>David Goldman</Text>
                 <DefaultButton buttonText={'Subscribe'} style={styles.button} textStyle={styles.buttonText} />
@@ -31,7 +31,7 @@ export default class DashboardMainScreen extends React.PureComponent {
     }
 
     static navigationOptions = {
-          tabBarIcon: ({focused, tintColor}) => <AntDesign name="user" size={40} color={tintColor} />
+          tabBarIcon: ({focused, tintColor}) => <AntDesign name="user" size={30} color={tintColor} />
         };
 
 
@@ -41,8 +41,9 @@ export default class DashboardMainScreen extends React.PureComponent {
 const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center'
+    justifyContent: 'flex-end',
+      width: '100%',
+      paddingRight: 10
   },
   content: {
     justifyContent: 'center',
@@ -63,8 +64,7 @@ const styles = StyleSheet.create({
   },
   textStyle: {
     fontWeight: 'bold',
-    fontSize: 18,
-    marginLeft: 100
+    fontSize: 18
   },
   icon: {
     marginTop: 10

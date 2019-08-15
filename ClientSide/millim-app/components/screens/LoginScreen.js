@@ -29,6 +29,10 @@ export default class LoginScreen extends React.PureComponent {
         this.props.navigation.navigate('Signup');
     };
 
+    goToDashboard = () => {
+        this.props.navigation.navigate('Dashboard');
+    };
+
     render() {
         return (
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -42,7 +46,7 @@ export default class LoginScreen extends React.PureComponent {
                     <LabeledInput label={'Password: '}/>
                 </View>
 
-                <DefaultButton buttonText={'Login'}/>
+                <DefaultButton onPress={this.goToDashboard} buttonText={'Login'}/>
 
 
                 <Text style={styles.newHereText}>

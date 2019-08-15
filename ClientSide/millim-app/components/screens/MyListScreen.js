@@ -6,7 +6,7 @@ import { AntDesign } from '@expo/vector-icons';
 class MyListScreen extends React.PureComponent{
 
   static navigationOptions = {
-        tabBarIcon:({focused, tintColor}) => <AntDesign name="bars" size={40} color={tintColor} />
+        tabBarIcon:({focused, tintColor}) => <AntDesign name="bars" size={30} color={tintColor} />
       };
 
   render(){

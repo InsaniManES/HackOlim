@@ -1,6 +1,7 @@
 import React from 'react';
 import {View, Text, Image, StyleSheet, Picker} from 'react-native';
 import DefaultButton from "../partials/DefaultButton";
+import AppHeader from "../partials/AppHeader";
 
 
 
@@ -20,8 +21,10 @@ export default class LanguageSelectionScreen extends React.PureComponent {
 
     render() {
         return (
-            <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#9BB3DD', paddingHorizontal: 50}}>
+            <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#9BB3DD'}}>
+                <AppHeader/>
 
+                <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', paddingHorizontal: 50}}>
                 <Text style={styles.text}>Select your native language:</Text>
                 <View style={styles.dropdownContainer}>
                     <Picker style={{width: '100%', height: '70%'}} selectedValue={this.state.selectedLanguage} onValueChange={(itemValue, itemIndex) =>
@@ -33,6 +36,7 @@ export default class LanguageSelectionScreen extends React.PureComponent {
                 </View>
 
                 <DefaultButton onPress={this.goToDashboard} buttonText={'Continue'}/>
+                </View>
 
             </View>
         )

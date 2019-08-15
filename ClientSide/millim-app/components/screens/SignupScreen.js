@@ -2,6 +2,7 @@ import React from 'react';
 import {KeyboardAvoidingView, View, Text, ScrollView, StyleSheet, TouchableWithoutFeedback, Keyboard} from 'react-native';
 import LabeledInput from "../partials/LabeledInput";
 import DefaultButton from "../partials/DefaultButton";
+import AppHeader from "../partials/AppHeader";
 
 
 export default class SignupScreen extends React.PureComponent {
@@ -17,7 +18,9 @@ export default class SignupScreen extends React.PureComponent {
     render() {
         return (
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-            <KeyboardAvoidingView  behavior={'height'} style={{flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#9BB3DD'}}>
+            <KeyboardAvoidingView  behavior={'height'} style={{flex: 1, alignItems: 'center', backgroundColor: '#9BB3DD'}}>
+                <AppHeader/>
+                <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
 
                 <View style={styles.inputsContainer}>
                     <LabeledInput label={'Username: '}/>
@@ -27,6 +30,7 @@ export default class SignupScreen extends React.PureComponent {
                 </View>
 
                 <DefaultButton onPress={this.goToLanguageSelect} buttonText={'Join'}/>
+                </View>
             </KeyboardAvoidingView>
             </TouchableWithoutFeedback>
         )

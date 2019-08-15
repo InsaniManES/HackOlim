@@ -6,7 +6,7 @@ import { AntDesign } from '@expo/vector-icons';
 class CommunityScreen extends React.PureComponent{
 
   static navigationOptions = {
-        tabBarIcon: ({focused, tintColor}) => <AntDesign name="team" size={40} color={tintColor} />
+        tabBarIcon: ({focused, tintColor}) => <AntDesign name="team" size={30} color={tintColor} />
       };
 
   render(){

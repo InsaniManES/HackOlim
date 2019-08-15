@@ -6,7 +6,7 @@ import { AntDesign } from '@expo/vector-icons';
 class PlayScreen extends React.PureComponent{
 
   static navigationOptions = {
-        tabBarIcon: ({focused, tintColor}) => <AntDesign name="rocket1" size={40} color={tintColor} />
+        tabBarIcon: ({focused, tintColor}) => <AntDesign name="rocket1" size={30} color={tintColor} />
       };
 
   render(){
