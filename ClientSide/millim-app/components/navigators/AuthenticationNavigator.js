@@ -1,11 +1,19 @@
-import {createSwitchNavigator} from "react-navigation";
+import React from 'react';
+import {createStackNavigator} from "react-navigation";
 import LoginScreen from "../screens/LoginScreen";
+import AppHeader from "../partials/AppHeader";
+import SignupScreen from "../screens/SignupScreen";
 
 
 
-export const AuthNavigator =  createSwitchNavigator({
-    Login: LoginScreen
+export const AuthNavigator =  createStackNavigator({
+    Login: LoginScreen,
+    Signup: SignupScreen
 },{
     initialRouteName: 'Login',
-    backBehavior: 'none'
+    backBehavior: 'none',
+    defaultNavigationOptions: {
+        header: <AppHeader/>
+
+    }
 });

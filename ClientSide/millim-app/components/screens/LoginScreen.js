@@ -1,52 +1,53 @@
 import React from 'react';
 import {
-    KeyboardAvoidingView,
     View,
     Text,
-    ScrollView,
     Image,
     StyleSheet,
     TextInput,
-    TouchableOpacity
+    TouchableOpacity,
+    KeyboardAvoidingView,
+    TouchableWithoutFeedback,
+    Keyboard
 } from 'react-native';
 import {Divider} from "react-native-elements";
+import DefaultButton from "../partials/DefaultButton";
+import LabeledInput from "../partials/LabeledInput";
 
 
 export default class LoginScreen extends React.PureComponent {
+
+    static navigationOptions = {
+        header: null
+    };
 
     constructor(props) {
         super(props);
     }
 
+    goToSignup = () => {
+        this.props.navigation.navigate('Signup');
+    };
+
     render() {
         return (
-            <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#9BB3DD'}}>
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <KeyboardAvoidingView behavior={'height'} style={{flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#9BB3DD'}}>
                 <Image source={require('../../assets/images/millim-logo-white.png')}
                        style={{height: 150, width: 150, marginBottom: 5}}/>
                 <Divider style={{backgroundColor: 'white', width: 90, height: 7, marginBottom: 80}}/>
 
                 <View style={styles.inputsSection}>
-                    <View style={styles.inputContainer}>
-                        <Text style={styles.inputLabel}>Email: </Text>
-                        <TextInput style={styles.input}/>
-                    </View>
-
-                    <View style={styles.inputContainer}>
-                        <Text style={styles.inputLabel}>Password: </Text>
-                        <TextInput style={styles.input}/>
-                    </View>
-
+                    <LabeledInput label={'Email: '}/>
+                    <LabeledInput label={'Password: '}/>
                 </View>
 
-                <TouchableOpacity>
-                    <View style={styles.loginButton}>
-                        <Text style={styles.loginText}>Login</Text>
-                    </View>
-                </TouchableOpacity>
+                <DefaultButton buttonText={'Login'}/>
+
 
                 <Text style={styles.newHereText}>
                     {'New here? '}
-                    <Text style={{textDecorationLine: 'underline'}}>
+                    <Text onPress={this.goToSignup} style={{textDecorationLine: 'underline'}}>
                         Sign up!
                     </Text>
                 </Text>
@@ -61,7 +62,8 @@ export default class LoginScreen extends React.PureComponent {
                         </Text>
                     </View>
                 </TouchableOpacity>
-            </View>
+            </KeyboardAvoidingView>
+            </TouchableWithoutFeedback>
         )
 
     }
