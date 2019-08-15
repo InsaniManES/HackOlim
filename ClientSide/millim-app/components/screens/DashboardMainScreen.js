@@ -1,5 +1,6 @@
 import React from 'react';
 import {View, Text, ScrollView, StyleSheet} from 'react-native';
+import { AntDesign } from '@expo/vector-icons';
 
 
 export default class DashboardMainScreen extends React.PureComponent {
@@ -15,6 +16,10 @@ export default class DashboardMainScreen extends React.PureComponent {
             </View>)
 
     }
+
+    static navigationOptions = {
+          tabBarIcon: ({focused, tintColor}) => <AntDesign name="user" size={40} color={tintColor} />
+        };
 
 
 }
