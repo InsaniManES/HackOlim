@@ -22,8 +22,8 @@ export const DashboardNavigator = createBottomTabNavigator (
     tabBarOptions: {
       activeTintColor: '#0372B9',
       inactiveTintColor: '#817D7D',
-      // activeBackgroundColor: 'green',
-      // inactiveBackgroundColor: 'yellow',
+      // activeBackgroundColor: '#9BB3DD',
+      // inactiveBackgroundColor: '#9BB3DD',
       showLabel: false,
       showIcon: true
     }

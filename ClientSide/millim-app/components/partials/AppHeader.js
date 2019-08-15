@@ -17,7 +17,6 @@ export default class AppHeader extends React.PureComponent {
 
     }
 
-
 }
 
 

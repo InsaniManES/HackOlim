@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, KeyboardAvoidingView } from 'react-native';
 import { TabNavigator } from 'react-navigation';
 import { AntDesign } from '@expo/vector-icons';
 
@@ -11,9 +11,11 @@ class MyListScreen extends React.PureComponent{
 
   render(){
   return (
-    <View>
-      <Text>My List Screen</Text>
-    </View>
+    <KeyboardAvoidingView  behavior={'height'} contentContainerStyle={{alignItems: 'center'}} style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <View>
+        <Text>My List Screen</Text>
+      </View>
+    </KeyboardAvoidingView>
   );
 };
 }
