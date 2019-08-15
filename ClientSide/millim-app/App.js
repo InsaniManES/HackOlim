@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, View, StatusBar} from 'react-native';
+import {StyleSheet, Text, View, StatusBar, TouchableOpacity} from 'react-native';
 import {createSwitchNavigator, createAppContainer} from "react-navigation";
 import {AuthNavigator} from "./components/navigators/AuthenticationNavigator";
 import {DashboardNavigator} from "./components/navigators/DashboardNavigator";
@@ -26,6 +26,13 @@ export default class App extends React.Component {
         );
     }
 }
+
+
+
+//----------------Component Defaults-------------------
+    TouchableOpacity.defaultProps = TouchableOpacity.defaultProps || {};
+    TouchableOpacity.defaultProps.activeOpacity = 0.8;
+//-----------------------------------------------------
 
 const AppNavigator = createSwitchNavigator({
     Auth: AuthNavigator,
