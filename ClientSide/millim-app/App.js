@@ -40,7 +40,7 @@ const AppNavigator = createSwitchNavigator({
 
 }, {
     backBehavior: 'none',
-    initialRouteName: 'Dashboard'
+    initialRouteName: 'Auth'
 });
 
 const AppContainer = createAppContainer(AppNavigator);

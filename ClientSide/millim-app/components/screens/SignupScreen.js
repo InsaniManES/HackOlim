@@ -10,10 +10,14 @@ export default class SignupScreen extends React.PureComponent {
         super(props);
     }
 
+    goToLanguageSelect = () => {
+        this.props.navigation.navigate('LanguageSelect')
+    };
+
     render() {
         return (
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-            <KeyboardAvoidingView  behavior={'height'} contentContainerStyle={{alignItems: 'center'}} style={{flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#9BB3DD'}}>
+            <KeyboardAvoidingView  behavior={'height'} style={{flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#9BB3DD'}}>
 
                 <View style={styles.inputsContainer}>
                     <LabeledInput label={'Username: '}/>
@@ -22,7 +26,7 @@ export default class SignupScreen extends React.PureComponent {
                     <LabeledInput label={'Confirm Password: '}/>
                 </View>
 
-                <DefaultButton buttonText={'Join'}/>
+                <DefaultButton onPress={this.goToLanguageSelect} buttonText={'Join'}/>
             </KeyboardAvoidingView>
             </TouchableWithoutFeedback>
         )
