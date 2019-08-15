@@ -14,6 +14,7 @@ app.get('/', (req, res) => res.send('API Running')); //GET request - http://loca
 // Define Routes
 app.use('/api/users', require('./routes/api/users'));
 app.use('/api/auth', require('./routes/api/auth'));
+app.use('/api/words', require('./routes/api/words'));
 
 const PORT = process.env.PORT || 5000;
 
