@@ -40,6 +40,3 @@ export const DashboardNavigator = createStackNavigator({
         header: (headerProps) => <AppHeader {...headerProps} showPlus/>
     }
 });
-
-
-

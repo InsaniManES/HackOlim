@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, View, Text, KeyboardAvoidingView } from 'react-native';
 import { TabNavigator } from 'react-navigation';
 import { AntDesign } from '@expo/vector-icons';
+import WordsBar from '../partials/WordsBar';
 
 class MyListScreen extends React.PureComponent{
 
@@ -11,11 +12,11 @@ class MyListScreen extends React.PureComponent{
 
   render(){
   return (
-    <KeyboardAvoidingView  behavior={'height'} contentContainerStyle={{alignItems: 'center'}} style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <View>
-        <Text>My List Screen</Text>
-      </View>
-    </KeyboardAvoidingView>
+    <View>
+      <WordsBar />
+      <WordsBar />
+      <WordsBar />
+    </View>
   );
 };
 }
