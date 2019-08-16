@@ -2,6 +2,7 @@ import React from 'react';
 import {View, Text, Image, StyleSheet, Picker} from 'react-native';
 import DefaultButton from "../partials/DefaultButton";
 import AppHeader from "../partials/AppHeader";
+import * as api from '../../Services/ApiService';
 
 
 
@@ -11,12 +12,26 @@ export default class LanguageSelectionScreen extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {
-            selectedLanguage: 'English'
+            selectedLanguage: 'en'
         }
     }
 
+
+
     goToDashboard = () => {
         this.props.navigation.navigate('Dashboard');
+    };
+
+    registerUser = async () => {
+        let userData = {...this.props.navigation.state.params.userData, language: this.state.selectedLanguage};
+        let res = await api.registerUser(userData);
+        if(res){
+            console.log('Success');
+            this.goToDashboard();
+        }
+        else{
+            console.log('Fail');
+        }
     };
 
     render() {
@@ -30,12 +45,13 @@ export default class LanguageSelectionScreen extends React.PureComponent {
                     <Picker style={{width: '100%', height: '70%'}} selectedValue={this.state.selectedLanguage} onValueChange={(itemValue, itemIndex) =>
                         this.setState({selectedLanguage: itemValue})
                     }>
-                        <Picker.Item label={'English'} value={'English'}/>
-                        <Picker.Item label={'Spanish'} value={'Spanish'}/>
+                        <Picker.Item label={'English'} value={'en'}/>
+                        <Picker.Item label={'Spanish'} value={'sp'}/>
+                        <Picker.Item label={'French'} value={'fr'}/>
                     </Picker>
                 </View>
 
-                <DefaultButton onPress={this.goToDashboard} buttonText={'Continue'}/>
+                <DefaultButton onPress={this.registerUser} buttonText={'Continue'}/>
                 </View>
 
             </View>

@@ -13,7 +13,7 @@ export default class LabeledInput extends React.PureComponent {
         return (
             <View style={[styles.inputContainer, this.props.containerStyle]}>
                 <Text style={[styles.inputLabel, this.props.labelStyle]}>{this.props.label}</Text>
-                <TextInput onChangeText={this.props.onChangeText} style={[styles.input, this.props.inputStyle]}/>
+                <TextInput {...this.props.inputProps} onChangeText={this.props.onChangeText} style={[styles.input, this.props.inputStyle]}/>
             </View>
         )
 
@@ -26,7 +26,8 @@ LabeledInput.propTypes = {
     onChangeText: PropTypes.func,
     containerStyle: PropTypes.object,
     labelStyle: PropTypes.object,
-    inputStyle: PropTypes.object
+    inputStyle: PropTypes.object,
+    inputProps: PropTypes.object
 };
 
 

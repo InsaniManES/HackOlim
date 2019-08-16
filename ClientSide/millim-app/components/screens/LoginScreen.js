@@ -13,24 +13,42 @@ import {
 import {Divider} from "react-native-elements";
 import DefaultButton from "../partials/DefaultButton";
 import LabeledInput from "../partials/LabeledInput";
+import * as api from '../../Services/ApiService';
 
 
 export default class LoginScreen extends React.PureComponent {
+
+    constructor(props){
+        super(props);
+        this.state = {
+            email: '',
+            password: ''
+        }
+    }
 
     static navigationOptions = {
         header: null
     };
 
-    constructor(props) {
-        super(props);
-    }
 
     goToSignup = () => {
         this.props.navigation.navigate('Signup');
     };
 
-    goToDashboard = () => {
-        this.props.navigation.navigate('Dashboard');
+    goToDashboard = async () => {
+        let res = await api.login(this.state);
+        if(res) {
+            this.props.navigation.navigate('Dashboard');
+        }
+        else{
+            console.warn('Shit fucked up');
+        }
+    };
+
+    updateText = (text, value) => {
+        let newState = this.state;
+        newState[value] = text;
+        this.setState(newState);
     };
 
     render() {
@@ -42,8 +60,8 @@ export default class LoginScreen extends React.PureComponent {
                 <Divider style={{backgroundColor: 'white', width: 90, height: 7, marginBottom: 80}}/>
 
                 <View style={styles.inputsSection}>
-                    <LabeledInput label={'Email: '}/>
-                    <LabeledInput label={'Password: '}/>
+                    <LabeledInput onChangeText={(text) => this.updateText(text,'email')} label={'Email: '}/>
+                    <LabeledInput inputProps={{secureTextEntry: true}} onChangeText={(text) => this.updateText(text,'password')} label={'Password: '}/>
                 </View>
 
                 <DefaultButton onPress={this.goToDashboard} buttonText={'Login'}/>
