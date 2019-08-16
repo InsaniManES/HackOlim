@@ -1,27 +1,25 @@
 import React from 'react';
-import { StyleSheet, View, Text, KeyboardAvoidingView } from 'react-native';
-import { TabNavigator } from 'react-navigation';
-import { AntDesign } from '@expo/vector-icons';
+import {View, Text, ScrollView, StyleSheet} from 'react-native';
 
-class BadgesScreen extends React.PureComponent{
 
-  static navigationOptions = {
-        tabBarIcon:({focused, tintColor}) => <AntDesign name="bars" size={30} color={tintColor} />
-      };
+export default class BadgesScreen extends React.PureComponent {
 
-  render(){
-  return (
-    <KeyboardAvoidingView  behavior={'height'} contentContainerStyle={{alignItems: 'center'}} style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <View>
-        <Text>Badges Screen</Text>
-      </View>
-    </KeyboardAvoidingView>
-  );
-};
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        return (
+            <View style={{flex: 1}}>
+                <Text>This is BadgesScreen</Text>
+            </View>
+        )
+
+    }
+
+
 }
 
 
-
-const styles = StyleSheet.create({});
-
-export default BadgesScreen;
+const styles = StyleSheet.create({}
+)
