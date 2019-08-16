@@ -1,51 +1,54 @@
-const mysql = require('mysql');
+const mongoose = require('mongoose');
+const Language = require('../models/Language');
 
-// // The text to translate
-// const text = 'כלב';
-//
-// // The target language
-// const target = 'en';
-
-let WordsConnection = mysql.createConnection({
-  host: '192.168.1.35',
-  user: 'eran',
-  password: 'EranShiffman1234!',
-  database: 'Words'
-});
+const connectDB = async () => {
+  try {
+    await mongoose.connect(
+      'mongodb+srv://itay123:itay123@hackathonolim-rwaof.mongodb.net/test?retryWrites=true&w=majority"',
+      {
+        useNewUrlParser: true,
+        useCreateIndex: true,
+        useFindAndModify: false
+      }
+    );
+    console.log('MongoDB Connected...');
+  } catch (err) {
+    console.log(err.message);
+    //Exit process with failure
+    process.exit(1);
+  }
+};
 
 async function main() {
-  WordsConnection.connect();
-
+  connectDB();
   // Imports the Google Cloud client library
   const { Translate } = require('@google-cloud/translate');
 
-  // // Instantiates a client
+  // Instantiates a client
   const translate = new Translate();
 
-  const [languages] = await translate.getLanguages().catch(err => {
+  let [languages] = await translate.getLanguages().catch(err => {
     throw err;
   });
 
-  languages.forEach(lang => {
-    WordsConnection.query(
-      `INSERT INTO languages (code,name) VALUES ('${lang.code}','${
-        lang.name
-      }')`,
-      function(error, results, fields) {
-        if (error) throw error;
-        console.log(results);
-      }
-    );
+  let id = 1;
+  languages = languages.map(lang => {
+    lang.id = id;
+    id++;
+    return lang;
   });
 
-  // // Translates some text into Russian
-  //     translate.translate(text, target).then(async (translation)=>{
-  //         console.log(`Text: ${text}`);
-  //         console.log(`Translation: ${translation[0]}`);
-  //         console.log(languages);
-  //     });
+  console.log(JSON.stringify(languages));
 
-  WordsConnection.end();
+  Language.collection.insert(languages, onInsert);
+
+  function onInsert(err, docs) {
+    if (err) {
+      console.error(err);
+    } else {
+      console.info(`${docs.length} languages were successfully stored.`);
+    }
+  }
 }
 
 main();

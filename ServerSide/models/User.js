@@ -10,13 +10,20 @@ const UserSchema = new mongoose.Schema({
     required: true,
     unique: true
   },
+  googleID: {
+    type: String,
+    unique: true
+  },
+  facebookID: {
+    type: String,
+    unique: true
+  },
   password: {
     type: String,
     required: true
   },
   dateOfBirth: {
-    type: Date,
-    required: true
+    type: Date
   },
   language: {
     type: String,
@@ -25,6 +32,10 @@ const UserSchema = new mongoose.Schema({
   signUp: {
     type: Date,
     default: Date.now
+  },
+  picturePath: {
+    type: String,
+    default: ''
   }
 });
 

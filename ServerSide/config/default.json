@@ -8,8 +8,13 @@
     "database": "Words"
   },
   "facebook-keys": {
-    "clientSecret": "aa6ec51a7a11a158047e2ab6617330cc",
     "clientID": "360310554665653",
-    "callbackURL": "http://localhost:5000/auth/github/callback"
+    "clientSecret": "aa6ec51a7a11a158047e2ab6617330cc",
+    "callbackURL": "http://localhost:5000/api/auth/facebook/callback"
+  },
+  "google-keys": {
+    "clientID": "874476162613-n9tsa2874ckh5smsdkdj0e6pkp7gfv2i.apps.googleusercontent.com",
+    "clientSecret": "l2iAH78AdpM57eUxDedNaf9k",
+    "callbackURL": "http://localhost:5000/api/auth/google/callback"
   }
 }
