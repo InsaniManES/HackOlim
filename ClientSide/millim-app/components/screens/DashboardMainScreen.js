@@ -4,9 +4,10 @@ import AppHeader from "../partials/AppHeader";
 import { AntDesign } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 import DefaultButton from "../partials/DefaultButton";
+import HomeTabView from '../navigators/HomeTabView';
 
 
-export default class DashboardMainScreen extends React.PureComponent {
+export default class DashboardMainScreen extends React.Component {
 
     constructor(props) {
         super(props);
@@ -14,7 +15,7 @@ export default class DashboardMainScreen extends React.PureComponent {
 
     render() {
         return (
-          <KeyboardAvoidingView  behavior={'height'} contentContainerStyle={{alignItems: 'center'}} style={{flex: 1, paddingTop: 25, alignItems: 'center'}}>
+          <View  style={{flex: 1, paddingTop: 25, alignItems: 'center'}}>
             <View style={styles.row}>
                 <Text style={styles.textStyle}>David Goldman</Text>
                 <DefaultButton buttonText={'Subscribe'} style={styles.button} textStyle={styles.buttonText} />
@@ -22,10 +23,11 @@ export default class DashboardMainScreen extends React.PureComponent {
             <View style={styles.content}>
               <Text>Free member</Text>
             </View>
-            <View style={styles.icon}>
-            <FontAwesome name="user-circle" size={136} color="#0372B9" />
-            </View>
-          </KeyboardAvoidingView>
+
+            <FontAwesome name="user-circle" size={136} color="#0372B9" style={styles.icon} />
+            <HomeTabView />
+
+          </View>
           )
 
     }
@@ -68,6 +70,9 @@ const styles = StyleSheet.create({
   },
   icon: {
     marginTop: 10
+  },
+  tabView: {
+    flex: 1
   }
 }
 )

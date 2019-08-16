@@ -1,7 +1,8 @@
 import React from 'react';
-import { StyleSheet, View, Text, KeyboardAvoidingView } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 import { TabNavigator } from 'react-navigation';
 import { AntDesign } from '@expo/vector-icons';
+import CommunityTabView from '../navigators/CommunityTabView';
 
 class CommunityScreen extends React.PureComponent{
 
@@ -11,17 +12,19 @@ class CommunityScreen extends React.PureComponent{
 
   render(){
   return (
-    <KeyboardAvoidingView  behavior={'height'} contentContainerStyle={{alignItems: 'center'}} style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <View>
-        <Text>Community Screen</Text>
+      <View style={styles.tabView}>
+        <CommunityTabView />
       </View>
-    </KeyboardAvoidingView>
   );
 };
 }
 
 
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  tabView: {
+    flex: 1
+  }
+});
 
 export default CommunityScreen;
