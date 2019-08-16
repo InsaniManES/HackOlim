@@ -36,13 +36,13 @@ export default class LoginScreen extends React.PureComponent {
     };
 
     goToDashboard = async () => {
-        let res = await api.login(this.state);
-        if(res) {
+        // let res = await api.login(this.state);
+        // if(res) {
             this.props.navigation.navigate('Dashboard');
-        }
-        else{
-            console.warn('Shit fucked up');
-        }
+        // }
+        // else{
+        //     console.warn('Shit fucked up');
+        // }
     };
 
     updateText = (text, value) => {

@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
-import {StyleSheet, View, Text, KeyboardAvoidingView} from 'react-native';
-import {TabNavigator} from 'react-navigation';
+import React from 'react';
+import {StyleSheet, View, Text, Animated} from 'react-native';
 import {AntDesign} from '@expo/vector-icons';
 import {Feather} from '@expo/vector-icons';
 import DefaultButton from "../partials/DefaultButton";
+import {Divider} from "react-native-elements";
 
 
 let dummyData = [
@@ -11,6 +11,21 @@ let dummyData = [
         answers: ['Cool', 'Sleepy', 'On Fire', 'Horrible'],
         correctAnswer: 'Cool',
         hebrewWord: 'סבבה'
+    },
+    {
+        answers: ['Passion', 'Security', 'Happiness', 'Confusion'],
+        correctAnswer: 'Security',
+        hebrewWord: 'בטחון'
+    },
+    {
+        answers: ['Car', 'Bottle', 'Couch', 'Door'],
+        correctAnswer: 'Couch',
+        hebrewWord: 'ספה'
+    },
+    {
+        answers: ['Where?', 'How?', 'When?', 'Really?'],
+        correctAnswer: 'Really?',
+        hebrewWord: 'וואלה?'
     }
 ];
 
@@ -22,6 +37,8 @@ class PlayScreen extends React.PureComponent {
         this.state = {
             selectedAnswer: '',
             questionIndex: 0,
+            progressFill: new Animated.Value(0),
+            indicatorOpacity: new Animated.Value(0),
             answerIndicator: ''
         }
     }
@@ -35,24 +52,64 @@ class PlayScreen extends React.PureComponent {
         this.setState({selectedAnswer: answer});
     };
 
-    checkAnswer = () => {
-        this.setState((prevState) => ({answerIndicator: prevState.selectedAnswer === dummyData[prevState.questionIndex].correctAnswer ? 'check-circle' : 'x-circle'}));
+    getProgressFill = () => {
+        return this.state.progressFill.interpolate({
+            inputRange: [0, dummyData.length],
+            outputRange: ['0%', '100%']
+        })
     };
+
+    animateIndicator = () => {
+        Animated.timing(this.state.indicatorOpacity , {
+            toValue: 1,
+            duration:400
+        }).start( () => {
+            Animated.timing(this.state.indicatorOpacity, {
+                toValue: 0,
+                duration: 200
+            }).start(() => this.setState((prevState) => ({questionIndex: prevState.questionIndex +1, selectedAnswer: '', answerIndicator: ''})));
+        });
+    };
+
+    checkAnswer = () => {
+        this.setState((prevState) => ({answerIndicator: prevState.selectedAnswer === dummyData[prevState.questionIndex].correctAnswer ? 'check-circle' : 'x-circle'}), this.animateIndicator);
+    };
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if(this.state.questionIndex > prevState.questionIndex){
+            Animated.timing(this.state.progressFill, {
+                toValue: this.state.questionIndex,
+                duration: 200
+            }).start();
+        }
+    }
 
 
     render() {
         return (
-            <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+            <View style={{flex: 1, alignItems: 'center'}}>
 
-                <Text style={{fontSize: 20}}>Pick the best definition for this word:</Text>
+                <View style={styles.progressBar}>
+                    <Animated.View style={{
+                        height: '100%',
+                        borderRadius: 25,
+                        width: this.getProgressFill(),
+                        backgroundColor: '#9BB3DD'
+                    }}/>
+                </View>
+
+                <Text style={{fontSize: 20, marginBottom: 10}}>{this.state.questionIndex < dummyData.length ? 'Pick the best definition for this word:' : 'You Are Done!'}</Text>
 
                 <Text style={{
                     fontFamily: 'Roboto',
-                    fontSize: 24
-                }}> {dummyData[this.state.questionIndex].hebrewWord} </Text>
+                    fontSize: 24,
+                    marginBottom: 15
+                }}> {this.state.questionIndex < dummyData.length ? dummyData[this.state.questionIndex].hebrewWord : ''} </Text>
 
+                {this.state.questionIndex < dummyData.length && <Divider style={{height: 2, width: '80%', marginBottom: 20}}/>}
 
-                <View style={styles.row}>
+               { this.state.questionIndex < dummyData.length &&
+                   <View style={styles.row}>
                     {
                         dummyData[this.state.questionIndex].answers.map((answer) => (
                             <DefaultButton key={answer} onPress={() => this.selectAnswer(answer)} buttonText={answer}
@@ -62,6 +119,7 @@ class PlayScreen extends React.PureComponent {
                     }
 
                 </View>
+               }
 
                 {
                     this.state.selectedAnswer !== '' &&
@@ -71,12 +129,16 @@ class PlayScreen extends React.PureComponent {
                     </View>
                 }
 
-                {
-                    this.state.answerIndicator !== '' &&
 
-                        <Feather color={this.state.answerIndicator === 'check-circle' ? 'green' : 'red'} name={this.state.answerIndicator} size={35}/>
 
-                }
+                    <Animated.View style={{opacity: this.state.indicatorOpacity}}>
+                        {
+                            this.state.answerIndicator !== '' &&
+                            <Feather color={this.state.answerIndicator === 'check-circle' ? 'green' : 'red'}
+                                     name={this.state.answerIndicator} size={50}/>
+                        }
+                    </Animated.View>
+
 
             </View>
         );
@@ -108,6 +170,15 @@ const styles = StyleSheet.create({
     answerButton: {
         height: 40,
         width: 160
+    },
+    progressBar: {
+        width: '80%',
+        height: 15,
+        backgroundColor: '#E5E5E5',
+        borderRadius: 25,
+        marginTop: 25,
+        marginBottom: 80
+
     }
 });
 
