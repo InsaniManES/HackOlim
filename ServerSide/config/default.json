@@ -1,15 +1,15 @@
 {
   "mongoURI": "mongodb+srv://itay123:itay123@hackathonolim-rwaof.mongodb.net/test?retryWrites=true&w=majority",
   "jwtSecret": "mysecrettoken",
-  "mysql": {
-    "host": "192.168.1.35",
-    "user": "eran",
-    "password": "EranShiffman1234!",
-    "database": "Words"
-  },
   "facebook-keys": {
     "clientSecret": "aa6ec51a7a11a158047e2ab6617330cc",
     "clientID": "360310554665653",
     "callbackURL": "http://localhost:5000/auth/github/callback"
+  },
+  "mysql_words": {
+    "host": "10.104.238.133",
+    "user": "eran",
+    "password": "EranShiffman1234!",
+    "database": "Words"
   }
 }
