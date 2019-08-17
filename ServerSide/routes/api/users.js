@@ -1,8 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const config = require('config');
+const sign = require('../../config/jwt');
 
 // Used as middleware
 const { check, validationResult } = require('express-validator');
@@ -13,7 +12,7 @@ const User = require('../../models/User');
 // @desc   Register user
 // @access Public
 router.post(
-  '/',
+  '/add',
   [
     check('displayName', 'First name is required')
       .not()
@@ -25,18 +24,23 @@ router.post(
     ).isLength({ min: 6 }),
     check('language', 'Please choose a language')
       .not()
-      .isEmpty(),
-    check('dateOfBirth', 'Please include a valid date')
+      .isEmpty()
   ],
   async (req, res) => {
     const errors = validationResult(req);
-    console.log(errors.errors);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { displayName, email, password, language } = req.body;
-    const dateOfBirth = new Date(req.body.dateOfBirth);
+    const {
+      displayName,
+      email,
+      password,
+      language,
+      googleID,
+      facebookID
+    } = req.body;
+    //const dateOfBirth = new Date(req.body.dateOfBirth);
     try {
       // See if user exists
       let user = await User.findOne({ email: email });
@@ -52,7 +56,9 @@ router.post(
         email,
         password,
         language,
-        dateOfBirth
+        googleID,
+        facebookID
+        //dateOfBirth
       });
       console.log(user);
 
@@ -70,15 +76,19 @@ router.post(
         }
       };
 
-      jwt.sign(
-        payload,
-        config.get('jwtSecret'),
-        { expiresIn: 360000 },
-        (err, token) => {
-          if (err) throw err;
-          res.json({ token });
-        }
-      );
+      // jwt.sign(
+      //   payload,
+      //   config.get('jwtSecret'),
+      //   { expiresIn: 360000 },
+      //   (err, token) => {
+      //     if (err) throw err;
+      //     res.status(201).json({ token });
+      //   }
+      // );
+
+      sign(payload).then(token => {
+        res.status(201).json({ token });
+      });
     } catch (err) {
       console.error(err.message);
       res.status(500).send('Server error');

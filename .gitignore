@@ -38,6 +38,10 @@ jspm_packages/
 
 # Configuration private info
 ServerSide/config/default.json
+<<<<<<< HEAD
+=======
+ServerSide/jobs
+>>>>>>> ServerSide
 
 # TypeScript v1 declaration files
 typings/
