@@ -37,7 +37,7 @@ ServerSide/node_modules/
 jspm_packages/
 
 # Configuration private info
-# ServerSide/config/default.json
+ServerSide/config/default.json
 
 # TypeScript v1 declaration files
 typings/
