@@ -38,7 +38,7 @@ jspm_packages/
 
 # Configuration private info
 ServerSide/config/default.json
-ServerSide/jobs
+ServerSide/jobs/
 
 # TypeScript v1 declaration files
 typings/
